@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventuras con las Tablas</title>
+    <title>Aventuras con las Tablas v2</title>
     
     <!-- Cargamos React y ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -39,13 +39,14 @@
             animation: shake 0.3s ease-in-out;
         }
         
+        /* Scrollbar personalizado */
         .custom-scroll::-webkit-scrollbar { width: 8px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #c7c7cc; border-radius: 4px; }
         .custom-scroll::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
     </style>
 </head>
-<body class="bg-indigo-50">
+<body class="bg-indigo-50 selection:bg-indigo-200">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -69,67 +70,127 @@
         const EyeOff = (props) => <IconBase {...props}><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></IconBase>;
         const Shuffle = (props) => <IconBase {...props}><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></IconBase>;
         const ListOrdered = (props) => <IconBase {...props}><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></IconBase>;
+        const SettingsIcon = (props) => <IconBase {...props}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></IconBase>;
 
         // --- Componente Tutorial Modal ---
         const TutorialModal = ({ onClose }) => (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-                <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
-                    <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+                <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-shake">
+                    <div className="bg-indigo-600 p-4 text-white flex justify-between items-center">
                         <h2 className="text-2xl font-bold flex items-center gap-2"><BookOpen/> Cómo Jugar</h2>
-                        <button onClick={onClose} className="hover:bg-blue-700 p-1 rounded-full"><X/></button>
+                        <button onClick={onClose} className="hover:bg-indigo-700 p-1 rounded-full"><X/></button>
                     </div>
                     
                     <div className="p-6 overflow-y-auto custom-scroll space-y-6 text-gray-700">
                         <section>
-                            <h3 className="text-lg font-bold text-blue-600 mb-2">1. Los Modos de Juego</h3>
-                            <p className="mb-2">El juego tiene dos partes y puedes cambiar cuando quieras:</p>
+                            <h3 className="text-lg font-bold text-indigo-600 mb-2">1. Control Total</h3>
+                            <p className="mb-2">¡Nuevo! Ahora puedes elegir qué tablas estudiar desde la configuración y cambiar de modo cuando quieras:</p>
                             <ul className="list-disc pl-5 space-y-1">
-                                <li><strong>Modo Ordenado:</strong> Preguntas en orden (1x1, 1x2...).</li>
-                                <li><strong>Modo Aleatorio:</strong> Preguntas salteadas para retar tu mente.</li>
+                                <li><strong>Ordenado:</strong> Sigue la secuencia de las tablas elegidas (ej: 2x1, 2x2...).</li>
+                                <li><strong>Aleatorio:</strong> Preguntas sorpresa sin orden de las tablas elegidas.</li>
                             </ul>
                         </section>
 
                         <section>
-                            <h3 className="text-lg font-bold text-blue-600 mb-2">2. Botones y Ayudas</h3>
-                            <ul className="space-y-3">
+                            <h3 className="text-lg font-bold text-indigo-600 mb-2">2. El Tiempo Corre ⏱️</h3>
+                            <p>Hemos añadido un reloj. Podrás ver cuánto tiempo llevas jugando y al final, en el reporte, verás cuánto tardaste en contestar cada pregunta.</p>
+                        </section>
+
+                        <section>
+                            <h3 className="text-lg font-bold text-indigo-600 mb-2">3. Ayudas</h3>
+                             <ul className="space-y-3">
                                 <li className="flex items-start gap-3">
                                     <div className="bg-gray-200 p-2 rounded text-xs font-bold whitespace-nowrap">No lo sé 😓</div>
-                                    <p>Si te trabas, úsalo. Te diré la respuesta para que la aprendas.</p>
+                                    <p>Te diré la respuesta para que la aprendas.</p>
                                 </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="bg-indigo-600 text-white p-2 rounded text-xs font-bold whitespace-nowrap">¡Comprobar!</div>
-                                    <p>Escribe tu respuesta y pulsa este botón (o presiona ENTER).</p>
+                                <li className="flex items-center gap-3">
+                                    <div className="flex items-center gap-1 bg-yellow-100 px-2 rounded border border-yellow-300 text-xs font-bold"><Eye size={14}/> Ayuda Visual</div>
+                                    <p>Muestra puntos para contar si te trabas.</p>
                                 </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="flex items-center gap-1 bg-yellow-100 px-2 rounded border border-yellow-300"><Eye size={16}/> Ayuda Visual</div>
-                                    <p>Muestra u oculta los puntos de colores.</p>
-                                </li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h3 className="text-lg font-bold text-blue-600 mb-2">3. Guardar tus Logros</h3>
-                            <p>Cuando decidas parar, pulsa <strong>"Terminar Sesión"</strong>. Podrás:</p>
-                            <ul className="list-disc pl-5 mt-2">
-                                <li><strong>Descargar Imagen:</strong> Un diploma bonito.</li>
-                                <li><strong>Guardar PDF:</strong> Una lista completa que incluye <strong>cuánto tiempo tardaste</strong> en cada respuesta.</li>
                             </ul>
                         </section>
                     </div>
                     
                     <div className="p-4 border-t bg-gray-50 text-center">
                         <button onClick={onClose} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full shadow-lg transition transform hover:scale-105">
-                            ¡Entendido, a jugar!
+                            ¡Entendido!
                         </button>
                     </div>
                 </div>
             </div>
         );
 
+        // --- Componente Configuración Modal ---
+        const SettingsModal = ({ selectedTables, setSelectedTables, onClose }) => {
+            const toggleTable = (num) => {
+                if (selectedTables.includes(num)) {
+                    // Evitar que se quede sin ninguna tabla seleccionada
+                    if (selectedTables.length > 1) {
+                        setSelectedTables(selectedTables.filter(t => t !== num));
+                    }
+                } else {
+                    setSelectedTables([...selectedTables, num].sort((a, b) => a - b));
+                }
+            };
+
+            const selectAll = () => setSelectedTables([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+            return (
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+                    <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden flex flex-col">
+                        <div className="bg-gray-800 p-4 text-white flex justify-between items-center">
+                            <h2 className="text-xl font-bold flex items-center gap-2"><SettingsIcon/> Tablas a Estudiar</h2>
+                            <button onClick={onClose} className="hover:bg-gray-700 p-1 rounded-full"><X/></button>
+                        </div>
+                        
+                        <div className="p-6">
+                            <p className="text-gray-600 mb-4 text-center">Toca los números para activar o desactivar las tablas que quieres repasar en esta sesión.</p>
+                            
+                            <div className="grid grid-cols-5 gap-3 mb-6">
+                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
+                                    <button
+                                        key={num}
+                                        onClick={() => toggleTable(num)}
+                                        className={`py-3 rounded-xl font-bold text-xl transition-all transform active:scale-95 border-2
+                                            ${selectedTables.includes(num) 
+                                                ? 'bg-indigo-500 text-white border-indigo-600 shadow-md' 
+                                                : 'bg-gray-100 text-gray-400 border-gray-200 hover:bg-gray-200'}
+                                        `}
+                                    >
+                                        {num}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="flex justify-center">
+                                <button 
+                                    onClick={selectAll}
+                                    className="text-sm text-indigo-600 font-bold hover:underline"
+                                >
+                                    Seleccionar Todas
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div className="p-4 border-t bg-gray-50 flex justify-end">
+                            <button onClick={onClose} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full shadow transition">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
         // --- Aplicación Principal ---
         const App = () => {
-            const [gameState, setGameState] = useState('welcome');
+            const [gameState, setGameState] = useState('welcome'); // welcome, playing, summary
+            const [gameMode, setGameMode] = useState('sequential'); // sequential, random
+            
+            const [selectedTables, setSelectedTables] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+            
             const [showTutorial, setShowTutorial] = useState(false);
+            const [showSettings, setShowSettings] = useState(false);
             const [showVisualHelp, setShowVisualHelp] = useState(true);
             
             const [currentFactorA, setCurrentFactorA] = useState(1);
@@ -138,57 +199,43 @@
             const [feedback, setFeedback] = useState(null); 
             const [seqIndex, setSeqIndex] = useState(0); 
 
-            // Estadísticas y Tiempos
-            const [stats, setStats] = useState({});
             const [history, setHistory] = useState([]);
-            const [startTime, setStartTime] = useState(null);
-            const [elapsedSeconds, setElapsedSeconds] = useState(0);
+            
+            // Timers
+            const [sessionStartTime, setSessionStartTime] = useState(null);
+            const [sessionDuration, setSessionDuration] = useState(0); // in seconds
             const [questionStartTime, setQuestionStartTime] = useState(null);
 
             const inputRef = useRef(null);
-            const timerRef = useRef(null);
-
-            // Helper para formatear fecha para archivos: dd_mm_aaaa_HH_mm
-            const getFormattedDateString = () => {
-                const now = new Date();
-                const d = String(now.getDate()).padStart(2, '0');
-                const m = String(now.getMonth() + 1).padStart(2, '0');
-                const y = now.getFullYear();
-                const H = String(now.getHours()).padStart(2, '0');
-                const min = String(now.getMinutes()).padStart(2, '0');
-                return `${d}_${m}_${y}_${H}_${min}`;
-            };
-
-            // Inicializar estadísticas vacías
-            useEffect(() => {
-                const initialStats = {};
-                for (let i = 1; i <= 10; i++) {
-                    for (let j = 1; j <= 10; j++) {
-                        initialStats[`${i}x${j}`] = { asked: 0, correct: 0, givenUp: 0, wrongAttempts: 0 };
-                    }
-                }
-                setStats(initialStats);
-            }, []);
-
-            // Foco en input
-            useEffect(() => {
-                if ((gameState === 'sequential' || gameState === 'random') && !feedback) {
-                    setTimeout(() => inputRef.current?.focus(), 100);
-                }
-            }, [currentFactorA, currentFactorB, feedback, gameState]);
+            const appearanceIdRef = useRef(0); // <--- NUEVO: ID único para saber en qué turno exacto estamos
 
             // Cronómetro de sesión
             useEffect(() => {
-                if ((gameState === 'sequential' || gameState === 'random') && startTime) {
-                    timerRef.current = setInterval(() => {
-                        const now = Date.now();
-                        setElapsedSeconds(Math.floor((now - startTime) / 1000));
+                let interval;
+                if (gameState === 'playing') {
+                    interval = setInterval(() => {
+                        setSessionDuration(prev => prev + 1);
                     }, 1000);
-                } else {
-                    clearInterval(timerRef.current);
                 }
-                return () => clearInterval(timerRef.current);
-            }, [gameState, startTime]);
+                return () => clearInterval(interval);
+            }, [gameState]);
+
+            // Auto-focus input
+            useEffect(() => {
+                if (gameState === 'playing' && !feedback && !showSettings && !showTutorial) {
+                    setTimeout(() => inputRef.current?.focus(), 100);
+                }
+            }, [currentFactorA, currentFactorB, feedback, gameState, showSettings, showTutorial]);
+
+            // Ajustar pregunta si cambian las tablas seleccionadas DURANTE el juego
+            useEffect(() => {
+                if (gameState === 'playing' && selectedTables.length > 0) {
+                    if (!selectedTables.includes(currentFactorA)) {
+                        setQuestion(selectedTables[0], 1);
+                        if (gameMode === 'sequential') setSeqIndex(0);
+                    }
+                }
+            }, [selectedTables]);
 
             const formatTime = (seconds) => {
                 const mins = Math.floor(seconds / 60);
@@ -197,81 +244,56 @@
             };
 
             const startGame = () => {
-                setGameState('sequential');
+                setGameState('playing');
+                setGameMode('sequential');
                 setSeqIndex(0);
-                setQuestion(1, 1);
+                setQuestion(selectedTables[0], 1);
                 setFeedback(null);
                 setUserAnswer('');
                 setHistory([]);
-                const now = Date.now();
-                setStartTime(now);
-                setQuestionStartTime(now);
-                setElapsedSeconds(0);
-                
-                // IMPORTANTE: Resetear stats al iniciar nuevo juego
-                const resetStats = {};
-                for (let i = 1; i <= 10; i++) {
-                    for (let j = 1; j <= 10; j++) {
-                        resetStats[`${i}x${j}`] = { asked: 0, correct: 0, givenUp: 0, wrongAttempts: 0 };
-                    }
-                }
-                setStats(resetStats);
-            };
-
-            const toggleMode = () => {
-                if (gameState === 'sequential') {
-                    setGameState('random');
-                    generateRandomQuestion(); 
-                } else if (gameState === 'random') {
-                    setGameState('sequential');
-                    if (seqIndex >= 100) {
-                        setSeqIndex(0);
-                        setQuestion(1, 1);
-                    } else {
-                        const nextA = Math.floor(seqIndex / 10) + 1;
-                        const nextB = (seqIndex % 10) + 1;
-                        setQuestion(nextA, nextB);
-                    }
-                }
+                setSessionStartTime(Date.now());
+                setSessionDuration(0);
+                appearanceIdRef.current = 0; // Reiniciamos el contador de turnos
             };
 
             const setQuestion = (a, b) => {
                 setCurrentFactorA(a);
                 setCurrentFactorB(b);
-                setQuestionStartTime(Date.now());
+                setQuestionStartTime(Date.now()); // Reset question timer
+                appearanceIdRef.current += 1; // <--- NUEVO: Cada vez que sale una pregunta nueva, avanzamos el turno
+            };
+
+            const switchMode = (mode) => {
+                setGameMode(mode);
+                setUserAnswer('');
+                setFeedback(null);
                 
-                // CORRECCIÓN: NO actualizamos stats aquí. 
-                // Stats solo se actualizan al responder.
-                // Esto evita que preguntas solo "vistas" cuenten como intentos.
+                if (mode === 'random') {
+                    generateRandomQuestion();
+                } else {
+                    const aIndex = Math.floor(seqIndex / 10);
+                    if (aIndex < selectedTables.length) {
+                        const nextA = selectedTables[aIndex];
+                        const nextB = (seqIndex % 10) + 1;
+                        setQuestion(nextA, nextB);
+                    } else {
+                        setQuestion(selectedTables[0], 1);
+                        setSeqIndex(0);
+                    }
+                }
             };
 
-            const updateStats = (a, b, type) => {
-                setStats(prev => {
-                    const currentStat = prev[`${a}x${b}`];
-                    return {
-                        ...prev,
-                        [`${a}x${b}`]: {
-                            ...currentStat,
-                            asked: currentStat.asked + 1, // Ahora sí sumamos el intento
-                            correct: type === 'correct' ? currentStat.correct + 1 : currentStat.correct,
-                            wrongAttempts: type === 'incorrect' ? currentStat.wrongAttempts + 1 : currentStat.wrongAttempts,
-                            givenUp: type === 'givenUp' ? currentStat.givenUp + 1 : currentStat.givenUp
-                        }
-                    };
-                });
-            };
-
-            const addToHistory = (isCorrect, givenAnswer) => {
-                const timeTaken = ((Date.now() - questionStartTime) / 1000).toFixed(1);
+            const addToHistory = (isCorrect, givenAnswer, timeTaken) => {
                 setHistory(prev => [
                     ...prev,
                     {
+                        appearanceId: appearanceIdRef.current, // <--- NUEVO: Guardamos en qué turno se dio esta respuesta
                         question: `${currentFactorA} x ${currentFactorB}`,
                         correctAnswer: currentFactorA * currentFactorB,
                         userAnswer: givenAnswer,
                         isCorrect: isCorrect,
-                        timeTaken: timeTaken,
-                        timestamp: new Date().toLocaleTimeString('es-ES')
+                        timestamp: new Date().toLocaleTimeString('es-ES'),
+                        timeTaken: timeTaken // Guardamos el tiempo en segundos
                     }
                 ]);
             };
@@ -281,77 +303,71 @@
 
                 const correctAnswer = currentFactorA * currentFactorB;
                 const numAnswer = parseInt(userAnswer);
+                const timeTaken = (Date.now() - questionStartTime) / 1000;
 
                 if (numAnswer === correctAnswer) {
                     setFeedback('correct');
-                    addToHistory(true, numAnswer);
-
-                    if (feedback !== 'showAnswer') {
-                        // Actualizar stats solo si es la primera vez que acierta en este turno
-                        // (aunque con la lógica actual pasamos de pregunta inmediatamente)
-                        updateStats(currentFactorA, currentFactorB, 'correct');
-                    }
+                    addToHistory(true, numAnswer, timeTaken);
                     setTimeout(nextQuestion, 1500);
                 } else {
                     setFeedback('incorrect');
-                    addToHistory(false, numAnswer);
-                    updateStats(currentFactorA, currentFactorB, 'incorrect');
-                    
+                    addToHistory(false, numAnswer, timeTaken);
                     setUserAnswer('');
                     setTimeout(() => setFeedback(null), 1000);
                 }
             };
 
             const handleGiveUp = () => {
+                const timeTaken = (Date.now() - questionStartTime) / 1000;
                 setFeedback('showAnswer');
-                addToHistory(false, "No sabía");
-                updateStats(currentFactorA, currentFactorB, 'givenUp');
+                addToHistory(false, "No sabía", timeTaken);
             };
 
             const nextQuestion = () => {
                 setUserAnswer('');
                 setFeedback(null);
 
-                if (gameState === 'sequential') {
+                if (gameMode === 'sequential') {
                     const nextIndex = seqIndex + 1;
-                    if (nextIndex < 100) {
+                    const totalQuestions = selectedTables.length * 10;
+                    
+                    if (nextIndex < totalQuestions) {
                         setSeqIndex(nextIndex);
-                        const nextA = Math.floor(nextIndex / 10) + 1;
+                        const nextA = selectedTables[Math.floor(nextIndex / 10)];
                         const nextB = (nextIndex % 10) + 1;
                         setQuestion(nextA, nextB);
                     } else {
-                        setGameState('random');
+                        setGameMode('random');
                         generateRandomQuestion();
                     }
-                } else if (gameState === 'random') {
+                } else {
                     generateRandomQuestion();
                 }
             };
 
             const generateRandomQuestion = () => {
-                const a = Math.floor(Math.random() * 10) + 1;
+                const a = selectedTables[Math.floor(Math.random() * selectedTables.length)];
                 const b = Math.floor(Math.random() * 10) + 1;
                 setQuestion(a, b);
             };
 
             const finishGame = () => {
                 setGameState('summary');
-                clearInterval(timerRef.current);
             };
 
-            // --- Generación de Reportes ---
+            // --- Generación de Reportes 100% exactos leyendo desde el historial ---
             const downloadReportImage = () => {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                const width = 1000;
-                const height = 1200;
+                const width = 1200;
+                const height = 1400;
                 canvas.width = width;
                 canvas.height = height;
 
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(0, 0, width, height);
 
-                ctx.fillStyle = '#1e3a8a';
+                ctx.fillStyle = '#4f46e5'; // Indigo 600
                 ctx.fillRect(0, 0, width, 100);
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 40px sans-serif';
@@ -362,24 +378,59 @@
                 ctx.font = '20px sans-serif';
                 ctx.textAlign = 'left';
                 ctx.fillText(`Fecha: ${new Date().toLocaleDateString()}`, 50, 140);
-                ctx.fillText(`Tiempo Total: ${formatTime(elapsedSeconds)}`, 50, 170);
+                ctx.fillText(`Tiempo de Juego: ${formatTime(sessionDuration)}`, 50, 170);
 
                 const startX = 50;
                 const startY = 220;
-                const cellSize = 90;
+                const cellSize = 110;
 
+                // Generar las estadísticas EXACTAS basadas únicamente en el historial que se muestra en pantalla.
+                const finalStats = {};
+                for (let i = 1; i <= 10; i++) {
+                    for (let j = 1; j <= 10; j++) {
+                        finalStats[`${i}x${j}`] = { asked: 0, correct: 0, givenUp: 0, wrongAttempts: 0 };
+                    }
+                }
+
+                const seenAppearances = new Set(); // Para no contar doble el mismo turno si se equivocó y volvió a intentar
+
+                history.forEach(item => {
+                    const parts = item.question.split('x');
+                    const a = parseInt(parts[0].trim());
+                    const b = parseInt(parts[1].trim());
+                    const key = `${a}x${b}`;
+                    
+                    if (finalStats[key]) {
+                        // Si es la primera vez que revisamos este "turno" específico, sumamos 1 a "Salió"
+                        if (!seenAppearances.has(item.appearanceId)) {
+                            seenAppearances.add(item.appearanceId);
+                            finalStats[key].asked += 1;
+                        }
+                        
+                        if (item.isCorrect) {
+                            finalStats[key].correct += 1;
+                        } else if (item.userAnswer === "No sabía") {
+                            finalStats[key].givenUp += 1;
+                        } else {
+                            finalStats[key].wrongAttempts += 1;
+                        }
+                    }
+                });
+
+                // Dibujar la cuadrícula en el Canvas
                 for (let i = 1; i <= 10; i++) {
                     for (let j = 1; j <= 10; j++) {
                         const x = startX + (j - 1) * cellSize;
                         const y = startY + (i - 1) * cellSize;
                         const key = `${i}x${j}`;
-                        const data = stats[key];
+                        const data = finalStats[key];
                         
                         let color = '#f3f4f6';
-                        if (data.asked > 0) {
-                            if (data.givenUp > 0) color = '#fee2e2';
-                            else if (data.wrongAttempts > 0) color = '#fef9c3';
-                            else color = '#dcfce7';
+                        // Solo pintamos si de verdad la pregunta "Salió" al menos 1 vez
+                        if (data && data.asked > 0) {
+                            if (data.givenUp > 0) color = '#fee2e2'; // Rojo si alguna vez se rindió
+                            else if (data.wrongAttempts > 0) color = '#fef9c3'; // Amarillo si alguna vez se equivocó
+                            else color = '#dcfce7'; // Verde si TODAS las veces lo hizo perfecto
                         }
 
                         ctx.fillStyle = color;
@@ -387,18 +438,20 @@
                         
                         ctx.fillStyle = '#000';
                         ctx.textAlign = 'center';
-                        ctx.font = 'bold 18px sans-serif';
+                        ctx.font = 'bold 20px sans-serif';
                         ctx.fillText(`${i}x${j}`, x + cellSize/2, y + 25);
                         
-                        if (data.asked > 0) {
-                            ctx.font = '14px sans-serif';
+                        // Solo dibujamos los textos si la pregunta "Salió"
+                        if (data && data.asked > 0) {
+                            ctx.font = '13px sans-serif';
                             ctx.fillStyle = '#374151';
-                            ctx.fillText(`Total: ${data.asked}`, x + cellSize/2, y + 45);
+                            ctx.fillText(`Salió: ${data.asked}`, x + cellSize/2, y + 45);
                             ctx.fillStyle = '#166534';
-                            ctx.fillText(`✅: ${data.correct}`, x + cellSize/2, y + 62);
+                            ctx.fillText(`✅ Bien: ${data.correct}`, x + cellSize/2, y + 63);
                             ctx.fillStyle = '#991b1b';
-                            const incorrectas = data.wrongAttempts + data.givenUp;
-                            ctx.fillText(`❌: ${incorrectas}`, x + cellSize/2, y + 79);
+                            ctx.fillText(`❌ Mal: ${data.wrongAttempts}`, x + cellSize/2, y + 81);
+                            ctx.fillStyle = '#b45309'; 
+                            ctx.fillText(`😓 No sé: ${data.givenUp}`, x + cellSize/2, y + 99);
                         }
                     }
                 }
@@ -406,40 +459,30 @@
                 ctx.textAlign = 'center';
                 ctx.fillStyle = '#666';
                 ctx.font = 'italic 16px sans-serif';
-                ctx.fillText('Nota: Para ver el tiempo por pregunta, usa la opción "Guardar PDF".', width/2, height - 30);
+                ctx.fillText('Nota: Para ver el detalle de tiempo por pregunta, usa "Guardar PDF".', width/2, height - 30);
 
                 const link = document.createElement('a');
-                // Formato solicitado: Resumen_dd_mm_aaaa_hora
-                const fileName = `Resumen_${getFormattedDateString()}.png`;
-                link.download = fileName;
+                link.download = `diploma-tablas-${new Date().toLocaleDateString().replace(/\//g, '-')}.png`;
                 link.href = canvas.toDataURL();
                 link.click();
             };
 
             const handlePrint = () => {
-                // Cambiar el título temporalmente para que el PDF se guarde con el nombre correcto
-                const originalTitle = document.title;
-                document.title = `Reporte_multiplicaciones_${getFormattedDateString()}`;
-                
                 window.print();
-                
-                // Restaurar título original después de un breve delay
-                setTimeout(() => {
-                    document.title = originalTitle;
-                }, 1000);
             };
 
             // --- Vistas ---
 
             if (gameState === 'welcome') {
                 return (
-                    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center p-4 font-sans no-print">
+                    <div className="min-h-screen bg-indigo-50 flex flex-col items-center justify-center p-4 font-sans no-print">
                         {showTutorial && <TutorialModal onClose={() => setShowTutorial(false)} />}
+                        {showSettings && <SettingsModal selectedTables={selectedTables} setSelectedTables={setSelectedTables} onClose={() => setShowSettings(false)} />}
                         
-                        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-lg w-full text-center border-4 border-blue-200">
-                            <h1 className="text-4xl font-extrabold text-blue-600 mb-6">¡Aventuras con las Tablas! 🚀</h1>
+                        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-lg w-full text-center border-4 border-indigo-200">
+                            <h1 className="text-4xl font-extrabold text-indigo-600 mb-6">Aventuras con las Tablas 🚀</h1>
                             <p className="text-gray-600 mb-8 text-lg">
-                                Aprende, practica y reta a tu memoria con las tablas del 1 al 10.
+                                Aprende, practica y reta a tu memoria con las tablas de multiplicar.
                             </p>
                             
                             <div className="flex flex-col gap-4">
@@ -448,12 +491,20 @@
                                     className="bg-green-500 hover:bg-green-600 text-white text-2xl font-bold py-4 px-8 rounded-full shadow-lg transform transition hover:scale-105 flex items-center justify-center gap-2"
                                 >
                                     <Play size={32} />
-                                    ¡Empezar a Jugar!
+                                    ¡Jugar Ahora!
                                 </button>
                                 
                                 <button 
+                                    onClick={() => setShowSettings(true)}
+                                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-8 rounded-full shadow transition flex items-center justify-center gap-2"
+                                >
+                                    <SettingsIcon size={24} />
+                                    Elegir Tablas
+                                </button>
+
+                                <button 
                                     onClick={() => setShowTutorial(true)}
-                                    className="bg-blue-100 hover:bg-blue-200 text-blue-700 font-bold py-3 px-8 rounded-full shadow transition flex items-center justify-center gap-2"
+                                    className="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold py-3 px-8 rounded-full shadow transition flex items-center justify-center gap-2"
                                 >
                                     <BookOpen size={24} />
                                     ¿Cómo funciona?
@@ -472,7 +523,9 @@
                                 <div className="bg-indigo-600 p-6 text-white text-center">
                                     <div className="flex justify-center mb-2"><Award className="w-16 h-16 text-yellow-300" /></div>
                                     <h2 className="text-3xl font-bold">¡Sesión Terminada!</h2>
-                                    <p className="opacity-90 mt-2 text-xl font-mono">Tiempo Total: {formatTime(elapsedSeconds)}</p>
+                                    <p className="opacity-90 mt-2 text-xl font-mono bg-indigo-700 inline-block px-4 py-1 rounded-lg">
+                                        Tiempo Total: {formatTime(sessionDuration)}
+                                    </p>
                                 </div>
 
                                 <div className="p-8">
@@ -482,36 +535,37 @@
                                             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md transition"
                                         >
                                             <Printer size={20} />
-                                            Imprimir / Guardar PDF Detallado
+                                            Imprimir / PDF Detallado
                                         </button>
                                         <button 
                                             onClick={downloadReportImage}
-                                            className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md transition"
+                                            className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md transition"
                                         >
                                             <Download size={20} />
-                                            Descargar Imagen (Diploma)
+                                            Descargar Diploma
                                         </button>
                                         <button 
                                             onClick={() => setGameState('welcome')}
                                             className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md transition"
                                         >
                                             <RotateCcw size={20} />
-                                            Volver al Inicio
+                                            Inicio
                                         </button>
                                     </div>
 
-                                    <div className="text-center text-gray-500 mb-6">
-                                        <p>👇 Mira un avance del historial aquí abajo, o descarga el PDF para verlo completo.</p>
-                                    </div>
-
                                     <div className="border rounded-lg overflow-hidden">
-                                        <div className="bg-gray-100 p-3 font-bold text-gray-700 border-b">Últimos intentos (En pantalla)</div>
+                                        <div className="bg-gray-100 p-3 font-bold text-gray-700 border-b flex justify-between">
+                                            <span>Últimos intentos</span>
+                                            <span className="text-xs text-gray-500 font-normal self-center">(Descarga el PDF para ver todo)</span>
+                                        </div>
                                         <div className="divide-y max-h-60 overflow-y-auto">
                                             {history.slice().reverse().slice(0, 10).map((item, idx) => (
-                                                <div key={idx} className="p-3 flex justify-between items-center bg-white">
-                                                    <span className="font-bold text-gray-800">{item.question}</span>
+                                                <div key={idx} className="p-3 flex justify-between items-center bg-white hover:bg-gray-50">
+                                                    <div className="flex items-center gap-3">
+                                                        <span className="font-bold text-gray-800 w-16">{item.question}</span>
+                                                        <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">⏱ {item.timeTaken.toFixed(1)}s</span>
+                                                    </div>
                                                     <div className="flex items-center gap-4">
-                                                        <span className="text-sm font-mono text-gray-500 bg-gray-100 px-2 py-1 rounded">{item.timeTaken}s</span>
                                                         <span className="text-sm text-gray-500">Resp: {item.userAnswer}</span>
                                                         {item.isCorrect ? 
                                                             <span className="text-green-600 font-bold flex items-center gap-1"><Check size={16}/></span> : 
@@ -533,7 +587,7 @@
                                 <p className="text-gray-600">Tablas de Multiplicar</p>
                                 <div className="mt-2 text-sm flex justify-center gap-6">
                                     <span><strong>Fecha:</strong> {new Date().toLocaleDateString()}</span>
-                                    <span><strong>Duración:</strong> {formatTime(elapsedSeconds)}</span>
+                                    <span><strong>Duración Sesión:</strong> {formatTime(sessionDuration)}</span>
                                 </div>
                             </div>
 
@@ -547,8 +601,10 @@
                                     <div className="text-2xl font-bold text-green-600">{history.filter(h => h.isCorrect).length}</div>
                                  </div>
                                  <div>
-                                    <div className="text-xs uppercase text-gray-500 font-bold">Errores / Ayudas</div>
-                                    <div className="text-2xl font-bold text-red-600">{history.filter(h => !h.isCorrect).length}</div>
+                                    <div className="text-xs uppercase text-gray-500 font-bold">Promedio Tiempo</div>
+                                    <div className="text-2xl font-bold text-blue-600">
+                                        {history.length > 0 ? (history.reduce((acc, curr) => acc + curr.timeTaken, 0) / history.length).toFixed(1) : 0}s
+                                    </div>
                                  </div>
                                  <div>
                                     <div className="text-xs uppercase text-gray-500 font-bold">Nota Final</div>
@@ -560,108 +616,119 @@
                                  </div>
                             </div>
 
-                            <h3 className="text-xl font-bold mb-4 text-indigo-900 border-l-4 border-indigo-600 pl-3">Historial Completo de Intentos</h3>
+                            <h3 className="text-xl font-bold mb-4 text-indigo-900 border-l-4 border-indigo-600 pl-3">Historial Detallado</h3>
                             
                             <table className="w-full text-left">
                                 <thead>
                                     <tr>
-                                        <th className="w-10 text-center">#</th>
-                                        <th>Hora</th>
-                                        <th className="text-center">Tiempo</th>
+                                        <th className="w-12 text-center">#</th>
                                         <th>Pregunta</th>
-                                        <th className="text-center">R. Correcta</th>
-                                        <th className="text-center">R. Niño</th>
-                                        <th>Resultado</th>
+                                        <th className="text-center">Correcta</th>
+                                        <th className="text-center">Respuesta</th>
+                                        <th className="text-center">Tiempo</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {history.map((item, idx) => (
                                         <tr key={idx}>
                                             <td className="text-center text-gray-500 font-mono text-sm">{idx + 1}</td>
-                                            <td className="text-sm text-gray-600">{item.timestamp}</td>
-                                            <td className="text-center font-mono text-blue-800 bg-blue-50">{item.timeTaken}s</td>
                                             <td className="font-bold text-indigo-900 text-lg">{item.question}</td>
                                             <td className="text-center font-mono font-bold">{item.correctAnswer}</td>
                                             <td className="text-center font-mono">{item.userAnswer}</td>
+                                            <td className="text-center font-mono text-blue-800">{item.timeTaken.toFixed(1)}s</td>
                                             <td>
                                                 {item.isCorrect ? 
-                                                    <span className="text-green-700 font-bold flex items-center gap-1">✅ Correcto</span> : 
-                                                    <span className="text-red-600 font-bold flex items-center gap-1">❌ Incorrecto</span>
+                                                    <span className="text-green-700 font-bold flex items-center gap-1">✅ Bien</span> : 
+                                                    <span className="text-red-600 font-bold flex items-center gap-1">❌ Mal</span>
                                                 }
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-                            
-                            <div className="mt-8 text-center text-xs text-gray-400 pt-4 border-t">
-                                Reporte generado por Aventuras con las Tablas
-                            </div>
                         </div>
                     </div>
                 );
             }
 
             return (
-                <div className="min-h-screen bg-indigo-50 flex flex-col items-center justify-center p-4 font-sans no-print transition-colors duration-500 relative">
+                <div className="min-h-screen bg-indigo-50 flex flex-col items-center justify-center p-4 font-sans no-print relative">
+                    
                     {/* Botón flotante de ayuda */}
                     <button 
                         onClick={() => setShowTutorial(true)}
-                        className="absolute top-4 right-4 bg-blue-100 p-2 rounded-full text-blue-600 hover:bg-blue-200 transition z-10 shadow-sm"
+                        className="absolute top-4 right-4 bg-white p-2 rounded-full text-indigo-600 shadow-lg hover:bg-indigo-50 transition z-10"
                         title="Ver ayuda"
                     >
                         <BookOpen size={24} />
                     </button>
                     {showTutorial && <TutorialModal onClose={() => setShowTutorial(false)} />}
+                    {showSettings && <SettingsModal selectedTables={selectedTables} setSelectedTables={setSelectedTables} onClose={() => setShowSettings(false)} />}
 
-                    <div className="w-full max-w-lg flex flex-col gap-3 mb-6">
-                         {/* Barra de estado superior */}
-                        <div className="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-indigo-100">
-                             <div className="flex items-center gap-2">
+                    {/* Barra Superior de Control */}
+                    <div className="w-full max-w-lg mb-6 flex flex-col gap-4">
+                        
+                        {/* Timer y Botones */}
+                        <div className="flex justify-between items-center">
+                            <div className="bg-white px-4 py-2 rounded-full shadow border border-indigo-100 flex items-center gap-2 font-mono font-bold text-indigo-600">
+                                <Clock size={18} className="text-indigo-400"/>
+                                {formatTime(sessionDuration)}
+                            </div>
+                            <div className="flex gap-2">
                                 <button 
-                                    onClick={toggleMode}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-bold transition-all border-2
-                                        ${gameState === 'sequential' 
-                                            ? 'border-indigo-500 bg-indigo-50 text-indigo-700' 
-                                            : 'border-purple-500 bg-purple-50 text-purple-700'
-                                        }`}
-                                    title="Haz clic para cambiar de modo"
+                                    onClick={() => setShowSettings(true)}
+                                    className="bg-white hover:bg-indigo-50 text-indigo-600 border border-indigo-100 px-3 py-2 rounded-full text-sm font-bold transition flex items-center gap-1 shadow"
+                                    title="Elegir Tablas"
                                 >
-                                    {gameState === 'sequential' ? <ListOrdered size={16}/> : <Shuffle size={16}/>}
-                                    {gameState === 'sequential' ? 'Ordenado' : 'Aleatorio'}
+                                    <SettingsIcon size={16} /> Tablas
                                 </button>
-                             </div>
-                             
-                             <div className="flex items-center gap-2 font-mono text-lg font-bold text-gray-700 bg-gray-100 px-3 py-1 rounded-lg">
-                                <Clock size={20} className="text-indigo-500"/>
-                                {formatTime(elapsedSeconds)}
-                             </div>
+                                <button 
+                                    onClick={finishGame}
+                                    className="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-full text-sm font-bold transition shadow"
+                                >
+                                    Terminar
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="flex justify-end">
+                        {/* Switch de Modo */}
+                        <div className="bg-white p-1 rounded-xl shadow-md flex">
                             <button 
-                                onClick={finishGame}
-                                className="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-full text-xs font-bold transition"
+                                onClick={() => switchMode('sequential')}
+                                className={`flex-1 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all
+                                    ${gameMode === 'sequential' ? 'bg-indigo-100 text-indigo-700 shadow-sm' : 'text-gray-500 hover:bg-gray-50'}
+                                `}
                             >
-                                Terminar Sesión
+                                <ListOrdered size={16}/> En Orden
+                            </button>
+                            <button 
+                                onClick={() => switchMode('random')}
+                                className={`flex-1 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all
+                                    ${gameMode === 'random' ? 'bg-indigo-100 text-indigo-700 shadow-sm' : 'text-gray-500 hover:bg-gray-50'}
+                                `}
+                            >
+                                <Shuffle size={16}/> Aleatorio
                             </button>
                         </div>
                     </div>
 
+                    {/* Área de Juego */}
                     <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-lg w-full text-center border-b-8 border-indigo-200 relative overflow-hidden">
                         
-                        {gameState === 'sequential' && (
-                            <div className="absolute top-0 left-0 w-full h-2 bg-gray-100">
+                        {/* Barra de progreso visual para modo secuencial ajustada a las tablas seleccionadas */}
+                        {gameMode === 'sequential' && (
+                            <div className="absolute top-0 left-0 w-full h-1.5 bg-gray-100">
                                 <div 
                                     className="h-full bg-green-400 transition-all duration-300" 
-                                    style={{ width: `${((seqIndex) / 100) * 100}%` }}
+                                    style={{ width: `${((seqIndex) / (selectedTables.length * 10)) * 100}%` }}
                                 ></div>
                             </div>
                         )}
 
-                        <div className="mb-8 mt-4">
-                            <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mb-2">¿Cuánto es?</p>
-                            <div className="flex items-center justify-center gap-4 text-6xl font-black text-gray-800">
+                        <div className="mb-8 mt-2">
+                            <p className="text-gray-400 uppercase tracking-widest text-xs font-bold mb-2">Resuelve</p>
+                            <div className="flex items-center justify-center gap-4 text-7xl font-black text-gray-800">
                                 <span>{currentFactorA}</span>
                                 <span className="text-indigo-400">×</span>
                                 <span>{currentFactorB}</span>
@@ -684,7 +751,7 @@
                                         onChange={(e) => setUserAnswer(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleCheck()}
                                         placeholder="?"
-                                        className={`w-full text-center text-4xl font-bold py-4 rounded-2xl border-4 outline-none transition-all
+                                        className={`w-full text-center text-5xl font-bold py-4 rounded-2xl border-4 outline-none transition-all
                                             ${feedback === 'incorrect' ? 'border-red-400 bg-red-50 animate-shake' : 'border-indigo-100 focus:border-indigo-400 focus:bg-indigo-50'}
                                             ${feedback === 'correct' ? 'border-green-400 bg-green-50' : ''}
                                         `}
@@ -706,9 +773,8 @@
                                         <button 
                                             onClick={handleGiveUp}
                                             className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-3 rounded-xl shadow transition"
-                                            title="Ver respuesta"
                                         >
-                                            No lo sé 😓
+                                            No sé 😓
                                         </button>
                                         <button 
                                             onClick={handleCheck}
@@ -726,63 +792,46 @@
                             <div className="h-8 mt-2">
                                 {feedback === 'correct' && (
                                     <p className="text-green-500 font-bold text-lg animate-bounce flex items-center gap-2">
-                                        <Check size={24} /> ¡Excelente!
+                                        <Check size={24} /> ¡Muy bien!
                                     </p>
                                 )}
                                 {feedback === 'incorrect' && (
                                     <p className="text-red-500 font-bold text-lg flex items-center gap-2">
-                                        <X size={24} /> Inténtalo de nuevo
-                                    </p>
-                                )}
-                                {feedback === 'showAnswer' && (
-                                    <p className="text-indigo-500 font-bold text-sm">
-                                        ¡Así se aprende! Repásalo y sigamos.
+                                        <X size={24} /> Casi, prueba otra vez
                                     </p>
                                 )}
                             </div>
                         </div>
                     </div>
                     
-                    {/* Sección de Ayuda Visual Interactiva */}
-                    <div className="mt-8 text-center transition-all w-full max-w-lg">
-                        <div className="flex justify-between items-center mb-4 px-4">
-                            <h3 className="text-sm font-bold text-indigo-800 uppercase tracking-wider">Ayuda Visual</h3>
-                            <button 
+                    {/* Ayuda Visual */}
+                    <div className="mt-6 w-full max-w-lg">
+                        <div className="flex justify-center mb-2">
+                             <button 
                                 onClick={() => setShowVisualHelp(!showVisualHelp)}
-                                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold transition ${showVisualHelp ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-200 text-gray-500'}`}
+                                className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition shadow-sm
+                                    ${showVisualHelp ? 'bg-white text-indigo-600 border border-indigo-100' : 'bg-gray-200 text-gray-500'}
+                                `}
                             >
-                                {showVisualHelp ? <><Eye size={14}/> Activada</> : <><EyeOff size={14}/> Desactivada</>}
+                                {showVisualHelp ? <><Eye size={14}/> Ocultar Ayuda Visual</> : <><EyeOff size={14}/> Mostrar Ayuda Visual</>}
                             </button>
                         </div>
                         
-                        {showVisualHelp ? (
-                            <div className="bg-white p-4 rounded-2xl shadow-inner border border-indigo-50">
-                                <p className="text-xs text-gray-400 mb-2">{currentFactorA} grupos de {currentFactorB} puntos</p>
+                        {showVisualHelp && (
+                            <div className="bg-white/80 backdrop-blur p-4 rounded-2xl shadow-sm border border-indigo-50 text-center animate-fade-in">
+                                <p className="text-xs text-gray-400 mb-3 uppercase tracking-wide font-bold">{currentFactorA} grupos de {currentFactorB}</p>
                                 <div className="flex flex-col gap-2 items-center">
                                     {[...Array(currentFactorA)].map((_, rowIndex) => (
                                         <div key={rowIndex} className="flex gap-2">
                                             {[...Array(currentFactorB)].map((_, colIndex) => (
-                                                <div key={colIndex} className="w-3 h-3 rounded-full bg-indigo-400 shadow-sm animate-pulse-slow"></div>
+                                                <div key={colIndex} className="w-3 h-3 rounded-full bg-indigo-400 shadow-sm"></div>
                                             ))}
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                        ) : (
-                            <div className="p-4 border-2 border-dashed border-gray-300 rounded-2xl text-gray-400 text-sm">
-                                Ayuda visual oculta. <br/> ¡Tú puedes! 💪
-                            </div>
                         )}
                     </div>
-                    <style>{`
-                        @keyframes pulse-slow {
-                            0%, 100% { opacity: 1; transform: scale(1); }
-                            50% { opacity: 0.8; transform: scale(0.95); }
-                        }
-                        .animate-pulse-slow {
-                            animation: pulse-slow 3s infinite ease-in-out;
-                        }
-                    `}</style>
                 </div>
             );
         };
